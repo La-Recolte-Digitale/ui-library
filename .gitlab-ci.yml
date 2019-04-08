@@ -11,6 +11,7 @@ build:
   only:
   - master
   - develop
+  - merge_requests
   script:
   - npm run build
 

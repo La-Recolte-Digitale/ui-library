@@ -20,21 +20,20 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
       background: white;
     }
 
-    .buttons-bottom button {
+    .buttons-bottom >>> button {
       display: flex;
       flex: 1;
       border-radius: 0 !important;
     }
 
-    .buttons-bottom button:not(:first-child) {
+    .buttons-bottom >>> button:not(:first-child) {
       border-left: 3px solid !important;
     }
 
     .bottom-spacer {
       height: 60px;
     }
-  `],
-  encapsulation: ViewEncapsulation.None
+  `]
 })
 export class LaRecolteActionBarComponent implements OnInit {
 
