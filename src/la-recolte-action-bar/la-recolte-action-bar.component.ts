@@ -1,9 +1,9 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'la-recolte-action-bar',
   template: `
-    <div class="buttons-bottom">
+    <div class="buttons-bottom" [style.position]="absolute ? 'absolute' : 'fixed'">
       <ng-content></ng-content>
     </div>
     <div class="bottom-spacer"></div>
@@ -11,7 +11,6 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
   styles: [`
     .buttons-bottom {
       white-space: nowrap;
-      position: fixed;
       bottom: 0;
       left: 0;
       right: 0;
@@ -27,15 +26,17 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
     }
 
     .buttons-bottom >>> button:not(:first-child) {
-      border-left: 3px solid !important;
+      margin-left: 3px !important;
+      box-shadow: none !important;
     }
 
     .bottom-spacer {
-      height: 60px;
+      height: 54px;
     }
   `]
 })
 export class LaRecolteActionBarComponent implements OnInit {
+  @Input() absolute: boolean = false;
 
   constructor() { }
 
