@@ -1,0 +1,29 @@
+{
+  "compileOnSave": true,
+  "compilerOptions": {
+    "target": "es5",
+    "lib": ["es2017", "es7", "es6", "dom"],
+    "declaration": true,
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "isolatedModules": false,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "noImplicitAny": true,
+    "preserveConstEnums": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "strictNullChecks": true,
+    "outDir": "dist",
+    "baseUrl": ".",
+    "paths": {
+      "@angular/*": [
+        "node_modules/@angular/*"
+      ]
+    }
+  },
+  "exclude": [
+    "node_modules",
+    "demo",
+    "dist"
+  ]
+}

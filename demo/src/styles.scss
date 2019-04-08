@@ -1,0 +1,36 @@
+/* You can add global styles to this file, and also import other style files */
+/* You can add global styles to this file, and also import other style files */
+
+@import "../node_modules/bulma/sass/utilities/initial-variables";
+
+@font-face {
+    font-family: moon-flower;
+    src: url(/assets/moon-flower.ttf);
+}
+
+$primary: #a3ceef;
+$warning: #cc1417;
+$danger: #cc1417;
+$link: rgb(10,0,90);
+$black: #1c1c1c;
+$info: $black;
+$modal-content-width: 500px;
+$subtitle-color: #9BBFCC;
+$dropdown-item-hover-color: $warning;
+$link-hover: $warning;
+$family-primary: 'Roboto', sans-serif;
+$family-secondary: moon-flower;
+$title-color: rgb(10,0,90);
+
+//$modal-card-body-background-color: rgba($black, 0.86);
+$modal-content-margin-mobile: 48px;
+//$modal-card-body-padding: 4px;
+//$link: $info;
+$panel-block-active-color: $primary;
+
+@import '../node_modules/bulma/sass/utilities/_all';
+@import '../node_modules/bulma/sass/grid/_all';
+@import '../node_modules/bulma/sass/elements/_all';
+@import '../node_modules/bulma/sass/components/_all';
+@import '../node_modules/bulma/sass/base/_all';
+@import '../node_modules/bulma/sass/layout/_all';
