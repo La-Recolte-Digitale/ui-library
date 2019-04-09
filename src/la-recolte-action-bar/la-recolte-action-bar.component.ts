@@ -17,6 +17,7 @@ import { Component, OnInit, Input } from '@angular/core';
       z-index: 100;
       display: flex;
       background: white;
+      z-index: 1;
     }
 
     .buttons-bottom >>> button {
