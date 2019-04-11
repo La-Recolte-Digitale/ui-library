@@ -5,8 +5,8 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build:dev": "tsc",
-    "build": "tsc --build tsconfig.json",
+    "build:dev": "ngc",
+    "build": "ngc --build tsconfig.json",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "peerDependencies": {
@@ -23,7 +23,8 @@
   "devDependencies": {
     "@angular/animations": "~7.2.0",
     "@angular/common": "~7.2.0",
-    "@angular/compiler": "~7.2.0",
+    "@angular/compiler": "^7.2.12",
+    "@angular/compiler-cli": "^7.2.12",
     "@angular/core": "~7.2.0",
     "@angular/elements": "^7.2.12",
     "@angular/forms": "~7.2.0",
@@ -31,8 +32,8 @@
     "@angular/platform-browser-dynamic": "~7.2.0",
     "@angular/router": "~7.2.0",
     "@types/node": "~8.9.4",
+    "typescript": "~3.2.0",
     "codelyzer": "^4.0.1",
-    "typescript": "^3.3.3",
     "tslint": "^5.11.0",
     "rxjs": "~6.3.3",
     "tslib": "^1.9.0",

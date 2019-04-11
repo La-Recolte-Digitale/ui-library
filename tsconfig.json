@@ -21,6 +21,9 @@
       ]
     }
   },
+  "angularCompilerOptions": {
+    "enableResourceInlining": true
+  },
   "exclude": [
     "node_modules",
     "demo",
