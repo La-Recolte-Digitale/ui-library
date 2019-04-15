@@ -1,0 +1,44 @@
+{
+  "name": "larecolte-ui",
+  "version": "0.0.0",
+  "description": "LaRecolte UI Library",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build:dev": "ngc",
+    "build": "ngc --build tsconfig.json",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "peerDependencies": {
+    "@angular/animations": "~7.2.0",
+    "@angular/common": "~7.2.0",
+    "@angular/compiler": "~7.2.0",
+    "@angular/core": "~7.2.0",
+    "@angular/elements": "^7.2.12",
+    "@angular/forms": "~7.2.0",
+    "@angular/platform-browser": "~7.2.0",
+    "@angular/platform-browser-dynamic": "~7.2.0",
+    "@angular/router": "~7.2.0"
+  },
+  "devDependencies": {
+    "@angular/animations": "~7.2.0",
+    "@angular/common": "~7.2.0",
+    "@angular/compiler": "^7.2.12",
+    "@angular/compiler-cli": "^7.2.12",
+    "@angular/core": "~7.2.0",
+    "@angular/elements": "^7.2.12",
+    "@angular/forms": "~7.2.0",
+    "@angular/platform-browser": "~7.2.0",
+    "@angular/platform-browser-dynamic": "~7.2.0",
+    "@angular/router": "~7.2.0",
+    "@types/node": "~8.9.4",
+    "typescript": "~3.2.0",
+    "codelyzer": "^4.0.1",
+    "tslint": "^5.11.0",
+    "rxjs": "~6.3.3",
+    "tslib": "^1.9.0",
+    "zone.js": "~0.8.26",
+    "node-sass": "^4.11.0"
+  },
+  "license": "ISC"
+}
