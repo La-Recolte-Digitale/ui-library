@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +7,18 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'demo';
+  toFixed = 0;
+  step = 1;
+  min = -2;
+  max = 7;
+  placeholder = '';
+  inputTest = {
+    value: 5
+  };
+
+  @ViewChild('testInput') testInput;
+
+  focusInput() {
+    this.testInput.setFocus();
+  }
 }

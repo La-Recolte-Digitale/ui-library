@@ -1,0 +1,23 @@
+<div class="integer-control-cnt">
+  <button class="button is-danger minus-btn"
+          (click)="changeStep(false)">
+            <span class="icon is-small">
+              <i class="fas fa-minus"></i>
+            </span>
+  </button>
+  <input #numberInput
+          class="input is-danger integer-control-input"
+          type="text"
+          [value]="value"
+          [placeholder]="placeholder"
+          [readonly]="readonly"
+          (change)="checkValue()"
+          (blur)="checkValue()"
+          (keypress)="onKeyPress($event)">
+  <button class="button is-danger plus-btn"
+          (click)="changeStep(true)">
+            <span class="icon is-small">
+              <i class="fas fa-plus"></i>
+            </span>
+  </button>
+</div>
