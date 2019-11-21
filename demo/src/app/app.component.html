@@ -1,3 +1,24 @@
+<la-recolte-number-field #testInput
+                          [value]="inputTest.value"
+                          [parent]="inputTest"
+                          property="value"
+                          [toFixed]="toFixed"
+                          [min]="min"
+                          [max]="max"
+                          [placeholder]="placeholder">
+</la-recolte-number-field>
+
+<p>Value: <input type="text" [(ngModel)]="inputTest.value"></p>
+<p>toFixed: <input type="text" [(ngModel)]="toFixed"></p>
+<p>step: <input type="text" [(ngModel)]="step"></p>
+<p>min: <input type="text" [(ngModel)]="min"></p>
+<p>max: <input type="text" [(ngModel)]="max"></p>
+<p>placeholder: <input type="text" [(ngModel)]="placeholder"></p>
+
+<button type="button" class="button is-primary" (click)="focusInput()">
+  Focus
+</button>
+
 <la-recolte-action-bar>
   <button type="button" class="button is-primary is-large">
     <span class="icon is-medium">
