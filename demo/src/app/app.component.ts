@@ -21,4 +21,8 @@ export class AppComponent {
   focusInput() {
     this.testInput.setFocus();
   }
+
+  onEvent(name, evt) {
+    console.log(name, evt)
+  }
 }

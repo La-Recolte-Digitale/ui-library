@@ -5,7 +5,12 @@
                           [toFixed]="toFixed"
                           [min]="min"
                           [max]="max"
-                          [placeholder]="placeholder">
+                          (change)="onEvent('change', $event)"
+                          (blur)="onEvent('blur', $event)"
+                          (focus)="onEvent('focus', $event)"
+                          (keyup)="onEvent('keyup', $event)"
+                          (keydown)="onEvent('keydown', $event)"
+                          (keypress)="onEvent('keypress', $event)">
 </la-recolte-number-field>
 
 <p>Value: <input type="text" [(ngModel)]="inputTest.value"></p>

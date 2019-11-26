@@ -9,11 +9,14 @@
           class="input is-danger integer-control-input"
           type="text"
           [value]="value"
-          [placeholder]="placeholder"
+          [placeholder]="placeholder || ''"
           [readonly]="readonly"
           (change)="checkValue()"
-          (blur)="checkValue()"
-          (keypress)="onKeyPress($event)">
+          (blur)="checkValue(); blur.emit($event)"
+          (focus)="focus.emit($event)"
+          (keypress)="onKeyPress($event); keypress.emit($event)"
+          (keyup)="keyup.emit($event)"
+          (keydown)="keydown.emit($event)">
   <button class="button is-danger plus-btn"
           (click)="changeStep(true)">
             <span class="icon is-small">
