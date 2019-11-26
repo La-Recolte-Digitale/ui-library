@@ -15,6 +15,7 @@ import {
   providers: []
 })
 export class LaRecolteNumberFieldComponent implements OnInit {
+  private _value: any = null;
   @Input() toFixed: number = 0;
   @Input() parent: Object;
   @Input() property: string;
@@ -23,7 +24,12 @@ export class LaRecolteNumberFieldComponent implements OnInit {
   @Input() max: number = Number.MAX_SAFE_INTEGER;
   @Input() step: number = 1;
   @Input() readonly: boolean = false;
-  @Input() value: any = 1;
+  @Input() get value(): any {
+    return (this._value || this._value === 0) ? this._value : null;
+  }
+  set value(value: any) {
+    this._value = (value || value === 0) ? value : null;
+  }
 
   @Output() readonly change = new EventEmitter();
   @Output() readonly focus = new EventEmitter();
@@ -58,6 +64,7 @@ export class LaRecolteNumberFieldComponent implements OnInit {
     } else {
       this.setValue(null);
     }
+    setTimeout(() => this.change.emit(this.numberInput.nativeElement.value));
   }
 
   private setValue(val: number | null) {
@@ -84,7 +91,7 @@ export class LaRecolteNumberFieldComponent implements OnInit {
   }
 
   changeStep(positive: boolean): void {
-    this.setValue(parseFloat(this.value) + (positive ? this.step : - this.step));
+    this.setValue((parseFloat(this.value) || 0) + (positive ? this.step : - this.step));
     this.checkValue();
   }
 }
