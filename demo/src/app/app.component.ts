@@ -8,9 +8,9 @@ import { Component, ViewChild } from '@angular/core';
 export class AppComponent {
   title = 'demo';
   toFixed = 0;
-  step = 1;
+  step = 10;
   min = -2;
-  max = 7;
+  max = 70;
   placeholder = '';
   inputTest = {
     value: 5
