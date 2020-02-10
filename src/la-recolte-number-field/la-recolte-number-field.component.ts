@@ -91,7 +91,17 @@ export class LaRecolteNumberFieldComponent implements OnInit {
   }
 
   changeStep(positive: boolean): void {
-    this.setValue((parseFloat(this.value) || 0) + (positive ? this.step : - this.step));
+    const parsedValue = parseFloat(this.value) || 0;
+    const remains = parsedValue % this.step;
+    let step = positive ? this.step : - this.step;
+
+    if (positive && parsedValue >= 0 || !positive && parsedValue < 0) {
+      step = step - remains
+    } else {
+      step = remains ? - remains : step
+    }
+
+    this.setValue(parsedValue + step);
     this.checkValue();
   }
 }
