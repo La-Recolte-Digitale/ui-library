@@ -23,6 +23,7 @@ export class LaRecolteNumberFieldComponent implements OnInit {
   @Input() min: number = Number.MIN_SAFE_INTEGER;
   @Input() max: number = Number.MAX_SAFE_INTEGER;
   @Input() step: number = 1;
+  @Input() eps: number = 0.0001;
   @Input() readonly: boolean = false;
   @Input() get value(): any {
     return (this._value || this._value === 0) ? this._value : null;
@@ -68,7 +69,7 @@ export class LaRecolteNumberFieldComponent implements OnInit {
   }
 
   private setValue(val: number | null) {
-    this.value = val;
+    this.value = val ? this.getCorrectedNumber(val) : val;
     this.numberInput.nativeElement.value = (val || val === 0) ? val : '';
     this.updateParent(val);
   }
@@ -86,13 +87,20 @@ export class LaRecolteNumberFieldComponent implements OnInit {
     }
   }
 
+  private getCorrectedNumber(num: number): number {
+    if (num && Math.abs(num) < this.eps) {
+      num = 0;
+    }
+    return num;
+  }
+
   onKeyPress(e: any): void {
     if ((e.which < 44 && e.which !== 13) || e.which === 47 || (e.which > 57 && e.which !== 101)){ e.preventDefault() }
   }
 
   changeStep(positive: boolean): void {
-    const parsedValue = parseFloat(this.value) || 0;
-    const remains = parsedValue % this.step;
+    const parsedValue = this.getCorrectedNumber(parseFloat(this.value) || 0);
+    const remains = this.getCorrectedNumber(parsedValue % this.step);
     let step = positive ? this.step : - this.step;
 
     if (positive && parsedValue >= 0 || !positive && parsedValue < 0) {
