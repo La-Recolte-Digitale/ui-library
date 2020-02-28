@@ -94,14 +94,26 @@ export class LaRecolteNumberFieldComponent implements OnInit {
     return num;
   }
 
+  private getRemains(value: number): number {
+    if (!value) {
+      return 0;
+    }
+    const correction = Math.pow(10, this.toFixed);
+    return (Math.round(this.parsedNumber(value) * correction) % Math.round(this.parsedNumber(this.step) * correction)) / correction;
+  }
+
+  private parsedNumber(num: number): number {
+    return parseFloat(num.toString())
+  }
+
   onKeyPress(e: any): void {
     if ((e.which < 44 && e.which !== 13) || e.which === 47 || (e.which > 57 && e.which !== 101)){ e.preventDefault() }
   }
 
   changeStep(positive: boolean): void {
     const parsedValue = this.getCorrectedNumber(parseFloat(this.value) || 0);
-    const remains = this.getCorrectedNumber(parsedValue % this.step);
-    let step = positive ? this.step : - this.step;
+    const remains = this.getCorrectedNumber(this.getRemains(parsedValue));
+    let step = this.parsedNumber(positive ? this.step : - this.step);
 
     if (positive && parsedValue >= 0 || !positive && parsedValue < 0) {
       step = step - remains
