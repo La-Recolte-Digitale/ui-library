@@ -16,9 +16,9 @@ import {
 })
 export class LaRecolteNumberFieldComponent implements OnInit {
   private _value: any = null;
+  valueStr: string;
   @Input() toFixed: number = 0;
-  @Input() parent: Object;
-  @Input() property: string;
+  @Input() showAllDecimals: string;
   @Input() placeholder: string;
   @Input() min: number = Number.MIN_SAFE_INTEGER;
   @Input() max: number = Number.MAX_SAFE_INTEGER;
@@ -30,8 +30,12 @@ export class LaRecolteNumberFieldComponent implements OnInit {
   }
   set value(value: any) {
     this._value = (value || value === 0) ? value : null;
+    this.valueStr = (value || value === 0) ? 
+      (this.showAllDecimals ? value.toFixed(this.toFixed) : value.toString()) : '';
+    this.numberInput.nativeElement.value = this.valueStr;
   }
 
+  @Output() readonly valueChange = new EventEmitter();
   @Output() readonly change = new EventEmitter();
   @Output() readonly focus = new EventEmitter();
   @Output() readonly blur = new EventEmitter();
@@ -54,10 +58,10 @@ export class LaRecolteNumberFieldComponent implements OnInit {
     let val: number = <number>((parsed || parsed === 0) ? parsed : null);
     if (val || val === 0) {
       if (val < this.min) {
-        this.setValue(this.min);
+        this.setValue(parseFloat(this.min.toString()));
       } else {
         if (val > this.max) {
-          this.setValue(this.max);
+          this.setValue(parseFloat(this.max.toString()));
         } else {
           this.updateToFixed(val);
         }
@@ -70,8 +74,7 @@ export class LaRecolteNumberFieldComponent implements OnInit {
 
   private setValue(val: number | null) {
     this.value = val ? this.getCorrectedNumber(val) : val;
-    this.numberInput.nativeElement.value = (val || val === 0) ? val : '';
-    this.updateParent(val);
+    this.valueChange.emit(val);
   }
 
   private updateToFixed(val: number) {
@@ -79,12 +82,6 @@ export class LaRecolteNumberFieldComponent implements OnInit {
       val = parseFloat(val.toFixed(this.toFixed));
     }
     this.setValue(val);
-  }
-
-  private updateParent(val: number | null) {
-    if (this.parent && this.property) {
-      this.parent[this.property] = val;
-    }
   }
 
   private getCorrectedNumber(num: number): number {

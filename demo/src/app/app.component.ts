@@ -8,6 +8,7 @@ import { Component, ViewChild } from '@angular/core';
 export class AppComponent {
   title = 'demo';
   toFixed = 0;
+  showAllDecimals = false;
   step = 10;
   min = -2;
   max = 70;
