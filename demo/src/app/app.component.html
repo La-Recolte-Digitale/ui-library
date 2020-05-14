@@ -1,8 +1,7 @@
 <la-recolte-number-field #testInput
-                          [value]="inputTest.value"
-                          [parent]="inputTest"
-                          property="value"
+                          [(value)]="inputTest.value"
                           [toFixed]="toFixed"
+                          [showAllDecimals]="showAllDecimals"
                           [min]="min"
                           [max]="max"
                           [step]="step"
@@ -20,6 +19,7 @@
 <p>min: <input type="text" [(ngModel)]="min"></p>
 <p>max: <input type="text" [(ngModel)]="max"></p>
 <p>placeholder: <input type="text" [(ngModel)]="placeholder"></p>
+<p>showAllDecimals: <input type="checkbox" [(ngModel)]="showAllDecimals"></p>
 
 <button type="button" class="button is-primary" (click)="focusInput()">
   Focus

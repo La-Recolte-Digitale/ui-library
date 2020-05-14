@@ -16,21 +16,26 @@ import {
 })
 export class LaRecolteNumberFieldComponent implements OnInit {
   private _value: any = null;
+  valueStr: string;
   @Input() toFixed: number = 0;
-  @Input() parent: Object;
-  @Input() property: string;
+  @Input() showAllDecimals: string;
   @Input() placeholder: string;
   @Input() min: number = Number.MIN_SAFE_INTEGER;
   @Input() max: number = Number.MAX_SAFE_INTEGER;
   @Input() step: number = 1;
+  @Input() eps: number = 0.0001;
   @Input() readonly: boolean = false;
   @Input() get value(): any {
     return (this._value || this._value === 0) ? this._value : null;
   }
   set value(value: any) {
     this._value = (value || value === 0) ? value : null;
+    this.valueStr = (value || value === 0) ? 
+      (this.showAllDecimals ? value.toFixed(this.toFixed) : value.toString()) : '';
+    this.numberInput.nativeElement.value = this.valueStr;
   }
 
+  @Output() readonly valueChange = new EventEmitter();
   @Output() readonly change = new EventEmitter();
   @Output() readonly focus = new EventEmitter();
   @Output() readonly blur = new EventEmitter();
@@ -47,16 +52,16 @@ export class LaRecolteNumberFieldComponent implements OnInit {
   ngOnInit() {
   }
 
-  checkValue() {
+  checkValue(evt: any) {
     let sVal = this.numberInput.nativeElement.value;
     let parsed = parseFloat(sVal && sVal.replace(/,/g, '.'));
     let val: number = <number>((parsed || parsed === 0) ? parsed : null);
     if (val || val === 0) {
       if (val < this.min) {
-        this.setValue(this.min);
+        this.setValue(parseFloat(this.min.toString()));
       } else {
         if (val > this.max) {
-          this.setValue(this.max);
+          this.setValue(parseFloat(this.max.toString()));
         } else {
           this.updateToFixed(val);
         }
@@ -64,13 +69,12 @@ export class LaRecolteNumberFieldComponent implements OnInit {
     } else {
       this.setValue(null);
     }
-    setTimeout(() => this.change.emit(this.numberInput.nativeElement.value));
+    setTimeout(() => this.change.emit(evt));
   }
 
   private setValue(val: number | null) {
-    this.value = val;
-    this.numberInput.nativeElement.value = (val || val === 0) ? val : '';
-    this.updateParent(val);
+    this.value = val ? this.getCorrectedNumber(val) : val;
+    this.valueChange.emit(val);
   }
 
   private updateToFixed(val: number) {
@@ -80,10 +84,23 @@ export class LaRecolteNumberFieldComponent implements OnInit {
     this.setValue(val);
   }
 
-  private updateParent(val: number | null) {
-    if (this.parent && this.property) {
-      this.parent[this.property] = val;
+  private getCorrectedNumber(num: number): number {
+    if (num && Math.abs(num) < this.eps) {
+      num = 0;
     }
+    return num;
+  }
+
+  private getRemains(value: number): number {
+    if (!value) {
+      return 0;
+    }
+    const correction = Math.pow(10, this.toFixed);
+    return (Math.round(this.parsedNumber(value) * correction) % Math.round(this.parsedNumber(this.step) * correction)) / correction;
+  }
+
+  private parsedNumber(num: number): number {
+    return parseFloat(num.toString())
   }
 
   onKeyPress(e: any): void {
@@ -91,9 +108,9 @@ export class LaRecolteNumberFieldComponent implements OnInit {
   }
 
   changeStep(positive: boolean): void {
-    const parsedValue = parseFloat(this.value) || 0;
-    const remains = parsedValue % this.step;
-    let step = positive ? this.step : - this.step;
+    const parsedValue = this.getCorrectedNumber(parseFloat(this.value) || 0);
+    const remains = this.getCorrectedNumber(this.getRemains(parsedValue));
+    let step = this.parsedNumber(positive ? this.step : - this.step);
 
     if (positive && parsedValue >= 0 || !positive && parsedValue < 0) {
       step = step - remains
@@ -102,6 +119,6 @@ export class LaRecolteNumberFieldComponent implements OnInit {
     }
 
     this.setValue(parsedValue + step);
-    this.checkValue();
+    this.checkValue({ target: this.numberInput.nativeElement });
   }
 }
