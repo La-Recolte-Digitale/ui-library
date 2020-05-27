@@ -50,9 +50,10 @@ export class LaRecolteNumberFieldComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.checkValue();
   }
 
-  checkValue(evt: any) {
+  checkValue(evt?: any) {
     let sVal = this.numberInput.nativeElement.value;
     let parsed = parseFloat(sVal && sVal.replace(/,/g, '.'));
     let val: number = <number>((parsed || parsed === 0) ? parsed : null);
@@ -69,7 +70,9 @@ export class LaRecolteNumberFieldComponent implements OnInit {
     } else {
       this.setValue(null);
     }
-    setTimeout(() => this.change.emit(evt));
+    if (evt) {
+      setTimeout(() => this.change.emit(evt));
+    }
   }
 
   private setValue(val: number | null) {

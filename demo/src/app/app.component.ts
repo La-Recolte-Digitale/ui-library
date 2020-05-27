@@ -7,14 +7,14 @@ import { Component, ViewChild } from '@angular/core';
 })
 export class AppComponent {
   title = 'demo';
-  toFixed = 0;
+  toFixed = 3;
   showAllDecimals = false;
   step = 10;
   min = -2;
   max = 70;
   placeholder = '';
   inputTest = {
-    value: 5
+    value: 0.099999999
   };
 
   @ViewChild('testInput') testInput;
