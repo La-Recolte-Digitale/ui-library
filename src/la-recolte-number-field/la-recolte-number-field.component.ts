@@ -32,6 +32,7 @@ export class LaRecolteNumberFieldComponent implements OnInit {
     this._value = (value || value === 0) ? value : null;
     this.valueStr = (value || value === 0) ? 
       (this.showAllDecimals ? value.toFixed(this.toFixed) : value.toString()) : '';
+    if (!this.numberInput) { return };
     this.numberInput.nativeElement.value = this.valueStr;
   }
 
@@ -46,6 +47,7 @@ export class LaRecolteNumberFieldComponent implements OnInit {
   @ViewChild('numberInput', { static: false }) numberInput: ElementRef;
 
   setFocus(): void {
+    if (!this.numberInput) { return };
     setTimeout(() => this.numberInput.nativeElement.focus());
   }
 
@@ -54,6 +56,7 @@ export class LaRecolteNumberFieldComponent implements OnInit {
   }
 
   checkValue(evt?: any) {
+    if (!this.numberInput) { return };
     let sVal = this.numberInput.nativeElement.value;
     let parsed = parseFloat(sVal && sVal.replace(/,/g, '.'));
     let val: number = <number>((parsed || parsed === 0) ? parsed : null);
@@ -122,6 +125,7 @@ export class LaRecolteNumberFieldComponent implements OnInit {
     }
 
     this.setValue(parsedValue + step);
+    if (!this.numberInput) { return };
     this.checkValue({ target: this.numberInput.nativeElement });
   }
 }
