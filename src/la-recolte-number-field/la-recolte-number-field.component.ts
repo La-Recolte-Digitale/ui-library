@@ -28,6 +28,8 @@ export class LaRecolteNumberFieldComponent implements OnInit {
   @Input() step: number = 1;
   @Input() eps: number = 0.0001;
   @Input() readonly: boolean = false;
+  @Input() disabledMinus: boolean = false;
+  @Input() disabledPlus: boolean = false;
   @Input() get value(): any {
     return (this._value || this._value === 0) ? this._value : null;
   }
