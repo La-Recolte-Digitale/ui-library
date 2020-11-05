@@ -1,12 +1,12 @@
 <div class="integer-control-cnt">
-  <button class="button is-danger minus-btn"
+  <button class="button {{buttonClass}} minus-btn"
           (click)="changeStep(false)">
             <span class="icon is-small">
               <i class="fas fa-minus"></i>
             </span>
   </button>
   <input #numberInput
-          class="input is-danger integer-control-input"
+          class="input {{buttonClass}} integer-control-input"
           type="text"
           [value]="valueStr"
           [placeholder]="placeholder || ''"
@@ -17,7 +17,7 @@
           (keypress)="onKeyPress($event); keypress.emit($event)"
           (keyup)="keyup.emit($event)"
           (keydown)="keydown.emit($event)">
-  <button class="button is-danger plus-btn"
+  <button class="button {{buttonClass}} plus-btn"
           (click)="changeStep(true)">
             <span class="icon is-small">
               <i class="fas fa-plus"></i>

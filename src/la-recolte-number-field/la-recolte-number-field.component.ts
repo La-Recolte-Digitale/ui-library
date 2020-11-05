@@ -8,6 +8,8 @@ import {
   EventEmitter
 } from '@angular/core';
 
+const DEFAUL_BUTTON_CLASS = 'is-danger';
+
 @Component({
   selector: 'la-recolte-number-field',
   templateUrl: './la-recolte-number-field.component.html',
@@ -17,6 +19,7 @@ import {
 export class LaRecolteNumberFieldComponent implements OnInit {
   private _value: any = null;
   valueStr: string;
+  @Input() buttonClass: string = DEFAUL_BUTTON_CLASS;
   @Input() toFixed: number = 0;
   @Input() showAllDecimals: string;
   @Input() placeholder: string;
