@@ -1,6 +1,7 @@
 <div class="integer-control-cnt">
-  <button class="button {{buttonClass}} minus-btn"
-          [disabled]="disabledMinus"
+  <button *ngIf="!disabled"
+          class="button {{buttonClass}} minus-btn"
+          [disabled]="readonly || disabledMinus"
           (click)="changeStep(false)">
             <span class="icon is-small">
               <i class="fas fa-minus"></i>
@@ -19,7 +20,7 @@
           (keyup)="keyup.emit($event)"
           (keydown)="keydown.emit($event)">
   <button class="button {{buttonClass}} plus-btn"
-          [disabled]="disabledPlus"
+          [disabled]="readonly || disabledPlus"
           (click)="changeStep(true)">
             <span class="icon is-small">
               <i class="fas fa-plus"></i>

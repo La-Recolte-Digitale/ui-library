@@ -7,6 +7,7 @@ import {
   Output,
   EventEmitter
 } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 const DEFAUL_BUTTON_CLASS = 'is-danger';
 
@@ -14,9 +15,17 @@ const DEFAUL_BUTTON_CLASS = 'is-danger';
   selector: 'la-recolte-number-field',
   templateUrl: './la-recolte-number-field.component.html',
   styleUrls: ['./la-recolte-number-field.component.scss'],
-  providers: []
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      multi:true,
+      useExisting: LaRecolteNumberFieldComponent
+    }
+  ]
 })
-export class LaRecolteNumberFieldComponent implements OnInit {
+export class LaRecolteNumberFieldComponent implements ControlValueAccessor, OnInit {
+  touched = false;
+  disabled = false;
   private _value: any = null;
   valueStr: string;
   @Input() buttonClass: string = DEFAUL_BUTTON_CLASS;
@@ -83,9 +92,36 @@ export class LaRecolteNumberFieldComponent implements OnInit {
     }
   }
 
+  onChange = (value: any) => { };
+
+  onTouched = () => { };
+
+  writeValue(quantity: any) { this.value = quantity }
+
+  registerOnChange(onChange: any) {
+    this.onChange = onChange;
+  }
+
+  registerOnTouched(onTouched: any) {
+    this.onTouched = onTouched;
+  }
+
+  markAsTouched() {
+    if (!this.touched) {
+      this.onTouched();
+      this.touched = true;
+    }
+  }
+
+  setDisabledState(disabled: boolean) {
+    this.disabled = disabled;
+    this.readonly = disabled;
+  }
+
   private setValue(val: number | null) {
     this.value = val ? this.getCorrectedNumber(val) : val;
     this.valueChange.emit(val);
+    this.onChange(val);
   }
 
   private updateToFixed(val: number) {
