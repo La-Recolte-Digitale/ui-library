@@ -15,7 +15,7 @@
           [readonly]="readonly"
           (change)="checkValue($event)"
           (blur)="checkValue($event); blur.emit($event)"
-          (focus)="focus.emit($event)"
+          (focus)="onFocus($event)"
           (keypress)="onKeyPress($event); keypress.emit($event)"
           (keyup)="keyup.emit($event)"
           (keydown)="keydown.emit($event)">

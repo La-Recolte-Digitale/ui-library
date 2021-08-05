@@ -169,4 +169,9 @@ export class LaRecolteNumberFieldComponent implements ControlValueAccessor, OnIn
     if (!this.numberInput) { return };
     this.checkValue({ target: this.numberInput.nativeElement });
   }
+
+  onFocus(evt: any): void {
+    if (this._value === 0) evt.target?.select();
+    this.focus.emit(evt);
+  }
 }
