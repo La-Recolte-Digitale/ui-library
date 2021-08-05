@@ -171,7 +171,7 @@ export class LaRecolteNumberFieldComponent implements ControlValueAccessor, OnIn
   }
 
   onFocus(evt: any): void {
-    if (this._value === 0) evt.target?.select();
+    if (this._value === 0) evt.target.select();
     this.focus.emit(evt);
   }
 }
