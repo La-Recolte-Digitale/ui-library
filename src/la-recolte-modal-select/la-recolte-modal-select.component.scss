@@ -30,17 +30,15 @@
   padding: 0;
 }
 
-.scroll-cnt {
-  .panel-block {
-    word-break: break-all;
-  }
+.is-break-all {
+  word-break: break-all;
 }
 
 .modal {
   justify-content: start;
+}
 
-  .modal-card {
-    margin-top: 0;
-    max-height: 100vh;
-  }
+.modal.is-active .modal-card {
+  margin-top: 0;
+  max-height: 100vh;
 }

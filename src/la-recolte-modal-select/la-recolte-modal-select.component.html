@@ -29,7 +29,7 @@
         </div>
         <div class="scroll-cnt">
           <a *ngFor="let item of items; trackBy:trackByItemFn"
-              class="panel-block"
+              class="panel-block is-break-all"
               [ngClass]="{ 'has-background-primary-light': item.selected }">
             <div class="columns is-mobile">
               <div *ngIf="multiselect" class="column is-1 is-relative">
