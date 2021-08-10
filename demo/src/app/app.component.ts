@@ -1,4 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -16,6 +17,9 @@ export class AppComponent {
   inputTest = {
     value: 0.099999999
   };
+  isSearchItemsOpened = false;
+  products$ = of([{ name: 'Product1', id: '1' }, { name: 'Product2', id: '2' }]);
+  productsLoading$ = of(false);
 
   @ViewChild('testInput') testInput;
 
@@ -25,5 +29,9 @@ export class AppComponent {
 
   onEvent(name, evt) {
     console.log(name, evt)
+  }
+
+  addProducts(evt) {
+    console.log(evt);
   }
 }

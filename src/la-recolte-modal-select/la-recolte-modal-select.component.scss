@@ -1,0 +1,46 @@
+.columns {
+  flex-grow: 1;
+}
+
+.is-1 {
+  min-width: 3rem;
+}
+
+.modal-content {
+  margin: 0 10px;
+}
+
+.popup-input {
+  max-width: 72px;
+}
+
+.confirm-button {
+  bottom: 8px;
+  position: fixed;
+  right: 8px;
+}
+
+.close-button {
+  bottom: 8px;
+  left: 8px;
+  position: fixed;
+}
+
+.popup-content {
+  padding: 0;
+}
+
+.scroll-cnt {
+  .panel-block {
+    word-break: break-all;
+  }
+}
+
+.modal {
+  justify-content: start;
+
+  .modal-card {
+    margin-top: 0;
+    max-height: 100vh;
+  }
+}

@@ -1,0 +1,66 @@
+<div class="modal" [ngClass]="{'is-active': isOpened}">
+
+  <div (click)="closeModal()" class="modal-background"></div>
+
+
+  <div class="modal-card">
+
+    <header class="modal-card-head">
+      <p class="modal-card-title" *ngIf="loading">
+        {{title}}&nbsp;<i class="fas fa-spinner fa-pulse"></i>
+      </p>
+      <p class="modal-card-title" *ngIf="!loading">
+        {{title}}
+      </p>
+      <button class="delete" aria-label="close" (click)="closeModal()"></button>
+    </header>
+
+
+    <div class="modal-card-body popup-content">
+      <div class="panel">
+
+        <div class="panel-block field">
+          <p class="control has-icons-left has-icons-right">
+            <input #searchInput class="input is-large has-text-centered" [(ngModel)]="search" type="search" placeholder="Recherche" [disabled]="loading">
+            <span class="icon is-medium is-left">
+              <i class="fas fa-search"></i>
+            </span>
+          </p>
+        </div>
+        <div class="scroll-cnt">
+          <a *ngFor="let item of items; trackBy:trackByItemFn"
+              class="panel-block"
+              [ngClass]="{ 'has-background-primary-light': item.selected }">
+            <div class="columns is-mobile">
+              <div *ngIf="multiselect" class="column is-1 is-relative">
+                <div class="is-absolute">
+                  <input
+                    class="is-checkradio is-circle is-medium has-text-danger"
+                    id="item-{{item[idProperty]}}"
+                    type="checkbox"
+                    [(ngModel)]="item.selected"
+                    [ngModelOptions]="{ standalone: true }">
+                  <label for="item-{{item[idProperty]}}"></label>
+                </div>
+              </div>
+              <div class="column" (click)="onItemSelect(item)">
+                {{item.name}}
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+
+    <la-recolte-action-bar *ngIf="multiselect" [absolute]="true">
+      <button class="button is-primary is-large" [disabled]="getSelectedItems().length === 0" (click)="onConfirmClick()">
+        <span class="icon is-medium">
+          <i class="fas fa-check"></i>
+        </span>
+      </button>
+    </la-recolte-action-bar>
+
+  </div>
+
+</div>

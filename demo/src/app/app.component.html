@@ -31,6 +31,8 @@
   Focus
 </button>
 
+<button class="button is-danger" (click)="isSearchItemsOpened = true">Show search</button>
+
 <la-recolte-action-bar>
   <button type="button" class="button is-primary is-large">
     <span class="icon is-medium">
@@ -43,4 +45,12 @@
     </span>
   </button>
 </la-recolte-action-bar>
+
+<la-recolte-modal-select [(isOpened)]="isSearchItemsOpened"
+            (confirm)="addProducts($event)"
+            [multiselect]="true"
+            idProperty="id"
+            title="Produits"
+            [items]="products$"
+            [loading]="productsLoading$"></la-recolte-modal-select>
 
