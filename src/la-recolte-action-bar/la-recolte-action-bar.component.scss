@@ -9,13 +9,13 @@
   z-index: 1;
 }
 
-.buttons-bottom >>> button {
+.buttons-bottom >>> .button {
   display: flex;
   flex: 1;
   border-radius: 0 !important;
 }
 
-.buttons-bottom >>> button:not(:first-child) {
+.buttons-bottom >>> .button:not(:first-child) {
   margin-left: 3px !important;
   box-shadow: none !important;
 }

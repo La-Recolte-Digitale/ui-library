@@ -3,6 +3,9 @@
                           [toFixed]="toFixed"
                           [showAllDecimals]="showAllDecimals"
                           [min]="min"
+                          [readonly]="readonly"
+                          [disabledMinus]="disabledMinus"
+                          [disabledPlus]="disabledPlus"
                           [max]="max"
                           [step]="step"
                           (change)="onEvent('change', $event)"
@@ -20,10 +23,15 @@
 <p>max: <input type="text" [(ngModel)]="max"></p>
 <p>placeholder: <input type="text" [(ngModel)]="placeholder"></p>
 <p>showAllDecimals: <input type="checkbox" [(ngModel)]="showAllDecimals"></p>
+<p>readonly: <input type="checkbox" [(ngModel)]="readonly"></p>
+<p>disabledMinus: <input type="checkbox" [(ngModel)]="disabledMinus"></p>
+<p>disabledPlus: <input type="checkbox" [(ngModel)]="disabledPlus"></p>
 
 <button type="button" class="button is-primary" (click)="focusInput()">
   Focus
 </button>
+
+<button class="button is-danger" (click)="isSearchItemsOpened = true">Show search</button>
 
 <la-recolte-action-bar>
   <button type="button" class="button is-primary is-large">
@@ -37,4 +45,12 @@
     </span>
   </button>
 </la-recolte-action-bar>
+
+<la-recolte-modal-select [(isOpened)]="isSearchItemsOpened"
+            (confirm)="addProducts($event)"
+            [multiselect]="true"
+            idProperty="id"
+            title="Produits"
+            [items]="products$"
+            [loading]="productsLoading$"></la-recolte-modal-select>
 

@@ -1,23 +1,26 @@
 <div class="integer-control-cnt">
-  <button class="button is-danger minus-btn"
+  <button *ngIf="!disabled"
+          class="button {{buttonClass}} minus-btn"
+          [disabled]="readonly || disabledMinus"
           (click)="changeStep(false)">
             <span class="icon is-small">
               <i class="fas fa-minus"></i>
             </span>
   </button>
   <input #numberInput
-          class="input is-danger integer-control-input"
+          class="input {{buttonClass}} integer-control-input has-text-centered"
           type="text"
           [value]="valueStr"
           [placeholder]="placeholder || ''"
           [readonly]="readonly"
           (change)="checkValue($event)"
           (blur)="checkValue($event); blur.emit($event)"
-          (focus)="focus.emit($event)"
+          (focus)="onFocus($event)"
           (keypress)="onKeyPress($event); keypress.emit($event)"
           (keyup)="keyup.emit($event)"
           (keydown)="keydown.emit($event)">
-  <button class="button is-danger plus-btn"
+  <button class="button {{buttonClass}} plus-btn"
+          [disabled]="readonly || disabledPlus"
           (click)="changeStep(true)">
             <span class="icon is-small">
               <i class="fas fa-plus"></i>
