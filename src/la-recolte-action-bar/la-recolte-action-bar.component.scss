@@ -1,12 +1,14 @@
 .buttons-bottom {
-  white-space: nowrap;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 100;
-  display: flex;
   background: white;
-  z-index: 1;
+  border: 0;
+  bottom: 0;
+  display: flex;
+  left: 0;
+  overflow: hidden;
+  padding: 0;
+  right: 0;
+  white-space: nowrap;
+  z-index: 100;
 }
 
 .buttons-bottom >>> .button {
