@@ -43,7 +43,7 @@ export class LaRecolteModalSelectComponent implements OnInit {
   }
   set loading(value: boolean) {
     if (this._loading && !value) {
-      this.focusOnSearch();
+      this.onItemsLoaded();
     }
     this._loading = value;
   }
@@ -54,7 +54,6 @@ export class LaRecolteModalSelectComponent implements OnInit {
     if (value) {
       this.allItems = this.stringHelpersService.sort(value, (v: any) => v.name);
       this._items = value.slice(0, 100);
-      timer().pipe(take(1)).subscribe(_ => this.handleHeightOnStart())
     }
   }
   @Input() get isOpened(): boolean {
@@ -65,7 +64,7 @@ export class LaRecolteModalSelectComponent implements OnInit {
     this.isOpenedChange.emit(this._isOpened);
     if (value) {
       if (this.search) { this.filterBySearch(this.search); }
-      this.focusOnSearch();
+      this.onItemsLoaded();
     } else {
       this.allItems && this.allItems.forEach(i => delete i.selected);
     }
@@ -74,15 +73,25 @@ export class LaRecolteModalSelectComponent implements OnInit {
   @ViewChild('searchInput', { static: false }) searchInput: ElementRef;
   @ViewChild('modalCard', { static: false }) modalCard: ElementRef;
 
+  private onItemsLoaded(): void {
+    timer().pipe(take(1)).subscribe(_ => {
+      if (this._loading) return;
+
+      this.focusOnSearch();
+      this.handleHeightOnStart();
+    })
+  }
+
   private focusOnSearch(): void {
-    timer().pipe(take(1)).subscribe(_ => this.searchInput && this.searchInput.nativeElement && this.searchInput.nativeElement.focus())
+    this.searchInput && this.searchInput.nativeElement && this.searchInput.nativeElement.focus();
   }
 
   private handleHeightOnStart() {
     if (!this.modalCard) return;
+
     const cardEl = this.modalCard.nativeElement;
     const height = cardEl.getBoundingClientRect().height;
-    cardEl.style.height = `${height}px`;
+    if (height) cardEl.style.height = `${height}px`;
   }
 
   closeModal() {
