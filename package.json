@@ -32,6 +32,7 @@
     "@angular/platform-browser-dynamic": "8.2.3",
     "@angular/router": "8.2.3",
     "@types/node": "12.7.2",
+    "bulma": "^0.9.3",
     "typescript": "3.5.3",
     "codelyzer": "5.1.0",
     "tslint": "5.19.0",

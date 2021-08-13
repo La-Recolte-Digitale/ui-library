@@ -1,6 +1,7 @@
 import { Component, OnInit, EventEmitter, Input, Output, ViewChild, ElementRef } from '@angular/core';
 import { StringHelpersService } from '../services/string-helpers.service/string-helpers.service';
 import { timer } from 'rxjs';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'la-recolte-modal-select',
@@ -53,6 +54,7 @@ export class LaRecolteModalSelectComponent implements OnInit {
     if (value) {
       this.allItems = this.stringHelpersService.sort(value, (v: any) => v.name);
       this._items = value.slice(0, 100);
+      timer().pipe(take(1)).subscribe(_ => this.handleHeightOnStart())
     }
   }
   @Input() get isOpened(): boolean {
@@ -70,9 +72,17 @@ export class LaRecolteModalSelectComponent implements OnInit {
   }
 
   @ViewChild('searchInput', { static: false }) searchInput: ElementRef;
+  @ViewChild('modalCard', { static: false }) modalCard: ElementRef;
 
   private focusOnSearch(): void {
-    timer().subscribe(_ => this.searchInput && this.searchInput.nativeElement && this.searchInput.nativeElement.focus())
+    timer().pipe(take(1)).subscribe(_ => this.searchInput && this.searchInput.nativeElement && this.searchInput.nativeElement.focus())
+  }
+
+  private handleHeightOnStart() {
+    if (!this.modalCard) return;
+    const cardEl = this.modalCard.nativeElement;
+    const height = cardEl.getBoundingClientRect().height;
+    cardEl.style.height = `${height}px`;
   }
 
   closeModal() {

@@ -35,10 +35,14 @@
 }
 
 .modal {
-  justify-content: start;
+  justify-content: center;
+}
+
+.scroll-cnt .panel-block {
+  height: 48px;
 }
 
 .modal.is-active .modal-card {
   margin-top: 0;
-  max-height: 100vh;
+  max-height: calc(100vh - 80px);
 }
